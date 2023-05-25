@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+<!--  <layout> :  이녀석이 항상 최상위여야한다. 그래야 데이터바인딩이 된다.   -->
+<!--    data binding의 최상위 요소 : layout   -->
+<!--    layout은 뷰는 아니다. 어떤 객체이다. -->
+
+<!--    데이터바인딩은 변수를만드는곳 / 레이아웃뷰로 나눠진다. -->
+
+    <!--        1. 여기서 변수를 만든다. -->
+    <data>
+        <variable
+            name="vm"
+            type="com.nha2023.mvvm.viewmodel.MyViewModel" />
+<!--  type에 패키지이름까지 넣어서 자료형을 알려준다.-->
+
+    </data>
+
+    <!--        2. 레이아웃뷰  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MainActivity">
+
+    <EditText
+        android:id="@+id/et_name"
+        android:text="name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onTextChanged="@{vm.changeName}"/>
+
+    <EditText
+        android:id="@+id/et_email"
+        android:text="email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onTextChanged="@{vm.changeEmail}"/>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:backgroundTint="#E91E63"
+        android:text="save data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{vm::clickedSave}"/>
+<!--    데이터바인딩해야 onClick이 보인다-->
+
+    <Button
+        android:id="@+id/btn_load"
+        android:text="load data"
+        android:backgroundTint="#663F9E"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{vm::clickedLoad}"/>
+
+    <TextView
+        android:id="@+id/tv"
+        android:textStyle="bold"
+        android:text="@{String.format(@string/item_data,vm.model.name,vm.model.email)}"
+        android:textColor="#3F51B5"
+        android:paddingLeft="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>
+
+
+</layout>
