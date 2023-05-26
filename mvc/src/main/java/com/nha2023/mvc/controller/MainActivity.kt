@@ -24,35 +24,35 @@ class MainActivity : AppCompatActivity() {
     //역할별 파일에 대한 구분을 쉽게 하기 위해 java폴더 안에 파일의 역할별로 package를 나누기도 함.
 
     //컨트롤러 역할 : 뷰와 모델을 건드린다.
-    // # view 참조변수
+    // # View 참조변수
     lateinit var binding : ActivityMainBinding
 
-    // # model 참조변수
+    // # Model 참조변수
     lateinit var model : ItemModel //아이템모델이 필요하다. 아이템 모델안에는 CRUD 기능이 적혀있음.
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
 
-        //여기서 액티비티는 컨트롤러 역할만 한다.
+            //여기서 액티비티는 컨트롤러 역할만 한다.
 
-        //#1. view역할 - 컨트롤러 역할을 같이한다.
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+            //#1. view역할 - 컨트롤러 역할을 같이한다.
+            binding = ActivityMainBinding.inflate(layoutInflater)
+            setContentView(binding.root)
 
-        //#2 model
-        model = ItemModel(this)
+            //#2 model
+            model = ItemModel(this)
 
-        //bindind과 model을 이용하여 컨트롤러를 컨트롤한다.
-        // 컨트롤러 역할 : 사용자 이벤트에 대응해서 save면 save, load면 load해라
-        binding.btnSave.setOnClickListener {
-            model.saveData(binding.etName.text.toString(),binding.etEmail.text.toString())
+            //bindind과 model을 이용하여 컨트롤러를 컨트롤한다.
+            // 컨트롤러 역할 : 사용자 이벤트에 대응해서 save면 save, load면 load해라
+            binding.btnSave.setOnClickListener {
+                model.saveData(binding.etName.text.toString(),binding.etEmail.text.toString())
 
-        }
+            }
 
-        binding.btnLoad.setOnClickListener {
-            val item : Item = model.loadData()
-            binding.tv.text = "${item.name} : ${item.email}"
-        }
+            binding.btnLoad.setOnClickListener {
+                val item : Item = model.loadData()
+                binding.tv.text = "${item.name} : ${item.email}"
+            }
 
 
     }
